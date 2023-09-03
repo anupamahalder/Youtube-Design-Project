@@ -59,11 +59,14 @@ const handleLoadCategories = async(categoryId)=>{
                     </div>
                 </div>
                 <div>
-                    <h1 class="text-center font-bold">${video?.title}</h1>
+                    <h1 class="text-center pt-1 font-bold">${video?.title}</h1>
                 </div>
             </div>
             <div class="pl-12 pt-1 text-gray-500 text-xs">
-                <p class="pb-1">${video?.authors[0]?.profile_name}</p>
+                <div class="flex gap-1 pb-1">
+                    <div><p>${video?.authors[0]?.profile_name}</p></div>
+                    <div><img src=${video.authors[0].verified?"./images/verified.png":"."} alt=""></div>
+                </div> 
                 <p>${video?.others?.views}</p>
             </div>
         </div>
