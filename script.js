@@ -1,3 +1,5 @@
+let prevCategoryId = 0;
+
 const handleCategory = async() =>{
     const response = await fetch("https://openapi.programming-hero.com/api/videos/categories");
     const data = await response.json();
@@ -17,10 +19,11 @@ const handleCategory = async() =>{
         tabContainer.appendChild(div);
     });
 }
-const handleLoadCategories = async(categoryId)=>{
+const handleLoadCategories = async(categoryId,btnClicked=false)=>{
     const response = await fetch(`https://openapi.programming-hero.com/api/videos/category/${categoryId}`);
-    const data = await response.json();
-    // console.log(data);
+    let data = await response.json();
+    prevCategoryId = categoryId;
+    // console.log(prevCategoryId);
     //get the card container
     const cardContainer = document.getElementById('card-container');
     //get the data not found div
@@ -45,6 +48,10 @@ const handleLoadCategories = async(categoryId)=>{
         noDataContainer.appendChild(div);
         return;
     }
+    if(btnClicked){
+        sortData(data.data);
+    }
+
     data.data?.forEach((video)=>{
         const div = document.createElement('div');
         div.innerHTML = `
@@ -70,13 +77,22 @@ const handleLoadCategories = async(categoryId)=>{
                     <div><p>${video?.authors[0]?.profile_name}</p></div>
                     <div><img src=${video.authors[0].verified?"./images/verified.png":"."} alt=""></div>
                 </div> 
-                <p>${video?.others?.views}</p>
+                <p>${video?.others?.views} Views</p>
             </div>
         </div>
         `;
         cardContainer.appendChild(div);
     });
-}
+    // document.getElementById('sort-btn').addEventListener('click',function(){
+    //     cardContainer.innerHTML="";
+    //     console.log("category id: ",prevCategoryId);
+    //     return handleLoadCategories(prevCategoryId,true);
+    // });
+};
+function helloSort(){
+        return handleLoadCategories(prevCategoryId,true);
+    }
+
 function changeSeconds(seconds){
     const sec = parseInt(seconds);
     let mins = sec/60;
@@ -86,14 +102,14 @@ function changeSeconds(seconds){
         let rem_hours = Math.floor(hours%24);
         day = Math.floor(hours/24);
         hours = rem_hours;
-        console.log("days: ",day);
+        // console.log("days: ",day);
     }
     let years = 0;
     if(day>365){
         let rem_days = Math.floor(day%365);
         years = Math.floor(rem_days/365);
         day = rem_days;
-        console.log("years: ",years);
+        // console.log("years: ",years);
     }
     let rem_mins = Math.floor(mins%60);
     let time = "";
@@ -115,4 +131,14 @@ function changeSeconds(seconds){
     return time;
 }
 handleCategory();
-// handleLoadCategories("1000");
+handleLoadCategories("1000");
+
+
+//link to home button from blog page
+function changePage(input){
+    window.location.href= input;
+};
+
+function sortData(input){
+    input.sort((a,b)=> b.others.views.split('K')[0] - a.others.views.split('K')[0]);
+}

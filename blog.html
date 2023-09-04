@@ -11,6 +11,9 @@
     <main>
         <div >
             <h1 class="p-5 text-center text-black text-3xl bg-blue-300 font-bold">Blog</h1>
+            <div class="-mt-14 flex justify-end px-3">
+                <button onclick="changePage('./index.html')" id="go-home-btn" class="px-4 py-2 text-right font-bold bg-red-600 hover:bg-red-700 rounded-lg text-white">Go Home</button>
+            </div>
             <li class="text-3xl text-red-800 py-7 px-6 font-bold">Discuss the scope of var, let, and const.</li>
             <div class="px-10">
                 <p>In JavaScript, <span class="font-bold">var</span>, <span class="font-bold">let</span>, and <span class="font-bold">const</span> are used to declare variables, but they have different scopes and behaviors. Understanding the scope of these variables is crucial for writing reliable and maintainable code.</p>
@@ -38,6 +41,7 @@
                 <li><span class="text-xl font-bold">Redefinition:</span> Just like <strong>let</strong>, you cannot redefine variables declared with <strong>const</strong> in the same scope.</li>
                 </div>
             </div>
+            <hr class="w-2/4 h-1 my-3 bg-gray-400 mx-auto border-none">
             <!-- answer 2  -->
             <li class="text-3xl text-red-800 py-7 px-6 font-bold">Tell us the use cases of null and undefined</li>
             <div class="px-10">
@@ -63,9 +67,10 @@
                 <li><span class="text-xl font-bold">As a Placeholder:</span> Sometimes, developers use <strong>null</strong> as a placeholder when they know a value will be assigned later.</li>
                 </div>
             </div>
+            <hr class="w-2/4 h-1 my-3 bg-gray-400 mx-auto border-none">
             <!-- answer 3  -->
             <li class="text-3xl text-red-800 py-7 px-6 font-bold">What do you mean by REST API?</li>
-            <div class="px-10 mb-10">
+            <div class="px-10 pb-10">
                 REST API, or Representational State Transfer Application Programming Interface, is an architectural style and a set of constraints for designing networked applications. It is a widely used approach for building web services that are scalable, stateless, and easy to maintain. REST APIs are commonly used in web development for client-server communication over HTTP. <br> <br>
 
                 Key characteristics and principles of RESTful APIs include: <br><br>
@@ -79,17 +84,17 @@
                             - <strong>GET</strong>: Retrieve data from the server. <br>
                             - <strong>POST</strong>: Create a new resource on the server. <br>
                             - <strong>PUT</strong>: Update an existing resource on the server. <br>
-                            - <strong>DELETE</strong>: Remove a resource from the server. <br>
+                            - <strong>DELETE</strong>: Remove a resource from the server.
                         </div>
-                    <br><br>
+                    <br>
                     <span class="text-xl font-bold">4. CRUD Operations:</span> REST APIs often map CRUD (Create, Read, Update, Delete) operations to HTTP methods. For example: <br>
                         <div class="pl-4">
                             - <strong>GET</strong> is used for reading (retrieving) resources. <br>
                             - <strong>POST</strong> is used for creating resources. <br>
                             - <strong>PUT</strong> is used for updating resources. <br>
-                            - <strong>DELETE</strong> is used for deleting resources. <br>
+                            - <strong>DELETE</strong> is used for deleting resources.
                         </div>
-                    <br><br>
+                    <br>
 
                     <span class="text-xl font-bold">5. Uniform Interface:</span> REST APIs have a uniform and consistent interface, which means that they follow a set of conventions and patterns for interacting with resources. This simplifies both client and server implementations.<br><br>
 
@@ -107,5 +112,6 @@
             </div>
         </div>
     </main>
+    <script src="./script.js"></script>
 </body>
 </html>
