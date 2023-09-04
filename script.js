@@ -1,5 +1,5 @@
 let prevCategoryId = 0;
-
+//Fetch the category data 
 const handleCategory = async() =>{
     const response = await fetch("https://openapi.programming-hero.com/api/videos/categories");
     const data = await response.json();
@@ -19,6 +19,7 @@ const handleCategory = async() =>{
         tabContainer.appendChild(div);
     });
 }
+// Fetch the data from each category by category id 
 const handleLoadCategories = async(categoryId,btnClicked=false)=>{
     const response = await fetch(`https://openapi.programming-hero.com/api/videos/category/${categoryId}`);
     let data = await response.json();
@@ -31,6 +32,7 @@ const handleLoadCategories = async(categoryId,btnClicked=false)=>{
     //clear the div
     cardContainer.innerHTML = '';
     noDataContainer.innerHTML = "";
+    // If data is not found
     if(data.status == false){
         const div = document.createElement('div');
         div.innerHTML=`
@@ -48,10 +50,11 @@ const handleLoadCategories = async(categoryId,btnClicked=false)=>{
         noDataContainer.appendChild(div);
         return;
     }
+    //If sorted by view button has clicked
     if(btnClicked){
         sortData(data.data);
     }
-
+    // Get the data into innerhtml
     data.data?.forEach((video)=>{
         const div = document.createElement('div');
         div.innerHTML = `
@@ -83,16 +86,12 @@ const handleLoadCategories = async(categoryId,btnClicked=false)=>{
         `;
         cardContainer.appendChild(div);
     });
-    // document.getElementById('sort-btn').addEventListener('click',function(){
-    //     cardContainer.innerHTML="";
-    //     console.log("category id: ",prevCategoryId);
-    //     return handleLoadCategories(prevCategoryId,true);
-    // });
 };
+//Function will be called when sort by view button will be clicked
 function helloSort(){
         return handleLoadCategories(prevCategoryId,true);
     }
-
+//Seconds to hour and minute conversion
 function changeSeconds(seconds){
     const sec = parseInt(seconds);
     let mins = sec/60;
@@ -130,7 +129,10 @@ function changeSeconds(seconds){
     }
     return time;
 }
+
+//call the function globally to get the category
 handleCategory();
+//get the default data to the screen of a category
 handleLoadCategories("1000");
 
 
@@ -138,7 +140,7 @@ handleLoadCategories("1000");
 function changePage(input){
     window.location.href= input;
 };
-
+//sort function to sort array of objects 
 function sortData(input){
     input.sort((a,b)=> b.others.views.split('K')[0] - a.others.views.split('K')[0]);
 }
